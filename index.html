@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PFS RIZAO Digital Fundamentals Dashboard</title>
+  <meta name="description" content="PFS RIZAO, Digital Fundamentals: digital readiness, skills before and after, by country.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-text">
+      <h1 id="ttl">RIZAO Digital Fundamentals · Dashboard</h1>
+      <p class="sub" id="sub">Partners in Food Solutions × Oo2 Formations &amp; Consulting</p>
+      <p class="updated" id="updated">Loading…</p>
+    </div>
+    <div class="logos">
+      <img src="assets/logo-pfs.png" alt="Partners in Food Solutions" width="277" height="96">
+      <img src="assets/logo-oo2.png" alt="Oo2 Formations &amp; Consulting" width="288" height="96">
+    </div>
+  </header>
+  <div class="strip" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+  <div id="demo" class="notice" hidden></div>
+
+  <nav class="filters" id="filters" aria-label="Filters">
+    <label for="f-phase" id="l-phase">Phase <b>▸</b></label>
+    <select id="f-phase"></select>
+    <label for="f-country" id="l-country">Country <b>▸</b></label>
+    <select id="f-country"></select>
+    <p class="scope" id="scope"></p>
+    <div class="lang" role="group" aria-label="Language / Langue">
+      <button type="button" id="lang-en" aria-pressed="true">EN</button>
+      <button type="button" id="lang-fr" aria-pressed="false">FR</button>
+    </div>
+  </nav>
+
+  <main id="app" aria-live="polite"></main>
+
+  <script src="assets/chart.umd.js"></script>
+  <script src="assets/core.js"></script>
+  <script src="assets/demo-data.js"></script>
+  <script src="assets/config.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
