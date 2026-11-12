@@ -103,7 +103,7 @@
   function refresh() {
     var id = ++requestId;
     writeUrl(); syncSelects();
-    if (!data) app.replaceChildren(el('p', { class: 'status', text: tr('Loading the figures… The first load can take a few seconds.', 'Chargement des chiffres… Le premier chargement peut prendre quelques secondes.') }));
+    if (!data) app.replaceChildren(el('p', { class: 'status', text: tr('Loading the figures… The first load takes a few seconds.', 'Chargement des chiffres… Le premier chargement prend quelques secondes.') }));
     load().then(function (d) {
       if (id !== requestId) return;
       data = d; buildFilterOptions(d); render();
@@ -150,8 +150,8 @@
     els.langFr.setAttribute('aria-pressed', LANG === 'fr');
     if (DEMO) {
       els.demo.hidden = false;
-      els.demo.textContent = tr('DEMONSTRATION: the figures below are fictitious and only show what this dashboard will display once participants have answered. No real person or company.',
-        'DÉMONSTRATION : les chiffres ci-dessous sont fictifs et montrent seulement ce que ce tableau de bord affichera quand les participants auront répondu. Aucune personne ni entreprise réelle.');
+      els.demo.textContent = tr('DEMONSTRATION: the figures below are fictitious. They show what the dashboard will display after the answers. No person or company is real.',
+        'DÉMONSTRATION : les chiffres ci-dessous sont fictifs. Ils montrent ce que le tableau de bord affichera après les réponses. Aucune personne ni entreprise n\'est réelle.');
     }
     if (!data) els.updated.textContent = tr('Loading…', 'Chargement…');
   }
@@ -312,8 +312,8 @@
     frag.appendChild(guide());
     var empty = (showBefore() && d.before.n === 0 && (!showAfter() || d.after.n === 0)) || (!showBefore() && d.after.n === 0);
     if (empty) frag.appendChild(el('div', { class: 'notice', text: tr(
-      'No answers yet for this selection. Change a filter or come back after participants have answered.',
-      'Aucune réponse pour cette sélection. Changez un filtre ou revenez après les réponses des participants.') }));
+      'No answers yet for this selection. Change a filter. You can also come back after the answers.',
+      'Aucune réponse pour cette sélection. Changez un filtre. Vous pouvez aussi revenir après les réponses.') }));
 
     var n = 1;
     frag.appendChild(readinessSection(d, n++));
@@ -325,8 +325,8 @@
     frag.appendChild(el('footer', { class: 'src', text: tr(
       'Source: the before and after questionnaires of the RIZAO Digital Fundamentals half-day training held in each company (PFS, Pillar 3). Generated automatically from the response sheet. ' +
       'Only aggregated figures are published: no participant name, phone number or free-text answer.',
-      'Source : Questionnaire AVANT et Questionnaire APRES de la demi-journée RIZAO Digital Fundamentals en entreprise (PFS, Pilier 3). Généré automatiquement à partir de la feuille de réponses. ' +
-      'Seuls des chiffres agrégés sont publiés : aucun nom, numéro de téléphone ni réponse libre.') }));
+      'Source : Questionnaire AVANT et Questionnaire APRES de la demi-journée RIZAO Digital Fundamentals (PFS, Pilier 3). La page se calcule à partir de la feuille de réponses. ' +
+      'La page publie seulement des chiffres agrégés. Elle ne montre aucun nom, numéro de téléphone ni réponse libre.') }));
     app.replaceChildren(frag);
     pending.forEach(function (p) { drawChart(p.canvas, p.spec); });
     pending = [];
@@ -334,13 +334,13 @@
 
   function guide() {
     var items = [
-      [tr('Before', 'Questionnaire AVANT'), tr('Starting-point questions and a 17-question test, taken once, at the start of the half-day in the company.', 'Questions de départ et test de 17 questions, remplis une fois, au début de la demi-journée en entreprise.')],
-      [tr('After', 'Questionnaire APRES'), tr('The same 17 questions plus the evaluation, taken once at the end of the half-day.', 'Les mêmes 17 questions plus l\'évaluation, remplis une fois, à la fin de la demi-journée.')],
-      [tr('Sales Cockpit', 'Sales Cockpit'), tr('Share of participants who say they can record a sale alone, without help: the key result of the half-day.', 'Part des participants qui déclarent saisir une vente seuls, sans aide : le résultat clé de la demi-journée.')],
-      [tr('Digital-ready company', 'Entreprise prête numériquement'), tr('Owns a computer AND has a permanent staff member who uses e-mail and scores 60% or more on the test. PFS target: 70% of companies by 31 December 2026.', 'Possède un ordinateur ET a un membre permanent du personnel qui utilise l\'e-mail et obtient 60 % ou plus au test. Cible PFS : 70 % des entreprises au 31 décembre 2026.')],
-      [tr('Levels', 'Niveaux'), tr('From the test score: below 40% = level 1, 40 to 69% = level 2, 70% or more = level 3. Shows how many participants moved up.', 'D\'après le score au test : moins de 40 % = niveau 1, 40 à 69 % = niveau 2, 70 % ou plus = niveau 3. Montre combien de participants progressent.')],
-      [tr('Same people', 'Mêmes personnes'), tr('People who answered both before and after: the most reliable comparison.', 'Personnes ayant rempli le Questionnaire AVANT et le Questionnaire APRES : la comparaison la plus fiable.')],
-      [tr('Colours', 'Couleurs'), tr('Green = improvement, red = decline. Use the two filters above: the whole page recalculates.', 'Vert = progression, rouge = recul. Utilisez les deux filtres ci-dessus : toute la page se recalcule.')]
+      [tr('Before', 'Questionnaire AVANT'), tr('Starting-point questions and a 17-question test, taken once, at the start of the half-day in the company.', 'Questions de départ et test de 17 questions. Rempli une fois, au début de la demi-journée.')],
+      [tr('After', 'Questionnaire APRES'), tr('The same 17 questions plus the evaluation, taken once at the end of the half-day.', 'Les mêmes 17 questions et l\'évaluation. Rempli une fois, à la fin de la demi-journée.')],
+      [tr('Sales Cockpit', 'Sales Cockpit'), tr('Share of participants who record a sale alone. This is the key result of the half-day.', 'Part des participants qui saisissent une vente seuls. C\'est le résultat clé de la demi-journée.')],
+      [tr('Digital-ready company', 'Entreprise prête numériquement'), tr('The company owns a computer. A permanent staff member uses e-mail. This person scores 60% or more on the test. PFS targets 70% of companies by 31 December 2026.', 'L\'entreprise possède un ordinateur. Un membre permanent du personnel utilise l\'e-mail. Il obtient au moins 60 % au test. PFS vise 70 % des entreprises au 31 décembre 2026.')],
+      [tr('Levels', 'Niveaux'), tr('Below 40% = level 1. 40 to 69% = level 2. 70% or more = level 3. The chart shows how many participants moved up.', 'Moins de 40 % = niveau 1. De 40 à 69 % = niveau 2. 70 % ou plus = niveau 3. Le graphique montre combien de participants progressent.')],
+      [tr('Same people', 'Mêmes personnes'), tr('These people answered both questionnaires. This is the most reliable comparison.', 'Ces personnes ont rempli les deux questionnaires. C\'est la comparaison la plus fiable.')],
+      [tr('Colours', 'Couleurs'), tr('Green = improvement. Red = decline. The two filters recalculate the whole page.', 'Vert = progression. Rouge = recul. Les deux filtres recalculent toute la page.')]
     ];
     return el('div', { class: 'guide' }, [
       el('h2', { text: tr('HOW TO READ THIS DASHBOARD', 'COMMENT LIRE CE TABLEAU DE BORD') }),
@@ -380,8 +380,8 @@
   /* 1. Digital readiness (featured) */
   function readinessSection(d, n) {
     var rd = d.readiness, sec = section(n + tr('. Digital readiness of the companies', '. Préparation numérique des entreprises'),
-      tr('The PFS priority: a computer owned by the company and a permanent staff member able to enter data, answer e-mails and use basic office tools. Counted per company.',
-         'La priorité PFS : un ordinateur appartenant à l\'entreprise et un membre permanent du personnel capable de saisir des données, répondre aux e-mails et utiliser les outils bureautiques de base. Compté par entreprise.'), true);
+      tr('This is the PFS priority. The company owns a computer. A permanent staff member can use e-mail and basic office tools. The count is per company.',
+         'C\'est la priorité PFS. L\'entreprise possède un ordinateur. Un membre permanent sait utiliser l\'e-mail et les outils de base. Le calcul se fait par entreprise.'), true);
     var crit = [
       [tr('Company owns a computer', 'L\'entreprise possède un ordinateur'), 'computer'],
       [tr('Permanent staff member who uses e-mail', 'Membre permanent qui utilise l\'e-mail'), 'person'],
@@ -396,8 +396,8 @@
       labels: crit.map(function (c, i) { return i === 3 ? tr('Digital-ready', 'Prête') : [tr('Computer', 'Ordinateur'), tr('E-mail user', 'Utilise l\'e-mail'), tr('Skills 60%+', 'Compétences 60 %+')][i]; }),
       format: 'pct', target: rd.target,
       datasets: phaseDatasets(crit.map(function (c) { return rd.before[c[1]]; }), crit.map(function (c) { return rd.after[c[1]]; }))
-    }, tr('A company is counted once, from the answers of its participants. The dashed line is the PFS target for 31 December 2026.',
-          'Une entreprise est comptée une fois, d\'après les réponses de ses participants. La ligne en pointillés est la cible PFS au 31 décembre 2026.')));
+    }, tr('Each company counts once. The dashed line is the PFS target for 31 December 2026.',
+          'Chaque entreprise compte une fois. La ligne en pointillés est la cible PFS au 31 décembre 2026.')));
 
     var pb = d.before.profile, pa = d.after.profile;
     var prow = [
@@ -427,8 +427,8 @@
   /* 2. Levels and groups */
   function levelsSection(d, n) {
     var sec = section(n + tr('. Levels', '. Niveaux'),
-      tr('Participants are placed in a level from their score on the before questionnaire. The after questionnaire uses the same scale and shows how many moved up.',
-         'Les participants sont placés dans un niveau d\'après leur score au Questionnaire AVANT. Le Questionnaire APRES utilise la même échelle et montre combien ont progressé.'));
+      tr('The before score gives the starting level. The after questionnaire uses the same scale. It shows how many participants moved up.',
+         'Le score au Questionnaire AVANT donne le niveau de départ. Le Questionnaire APRES utilise la même échelle. Il montre combien de participants progressent.'));
     var names = DF.LEVELS.map(function (l) { return LANG === 'fr' ? l.fr : l.en; });
     var rows = DF.LEVELS.map(function (l, i) {
       var row = phaseRow(names[i], d.before.n ? d.before.levels[l.id] / d.before.n : null, d.after.n ? d.after.levels[l.id] / d.after.n : null, d.before.levels[l.id], d.after.levels[l.id]);
@@ -440,7 +440,7 @@
     sec.appendChild(block(null, table(tr('Levels', 'Niveaux'), phaseCols(tr('Level', 'Niveau'), true, true), rows), {
       title: tr('Share of people by level', 'Part des personnes par niveau'), labels: names, format: 'pct',
       datasets: phaseDatasets(DF.LEVELS.map(function (l) { return d.before.n ? d.before.levels[l.id] / d.before.n : null; }), DF.LEVELS.map(function (l) { return d.after.n ? d.after.levels[l.id] / d.after.n : null; }))
-    }, tr('Fewer level 1 and more level 3 participants after the half-day means progress.', 'Moins de participants au niveau 1 et plus au niveau 3 après la demi-journée : c\'est une progression.')));
+    }, tr('Fewer level 1 and more level 3 participants after the half-day means progress.', 'Moins de niveau 1 et plus de niveau 3 après la demi-journée. C\'est une progression.')));
     if (state.phase === 'both' && d.same.n > 0) {
       sec.appendChild(block(tr('Same people: progress', 'Mêmes personnes : progression'), table(tr('Progress of the same people', 'Progression des mêmes personnes'),
         [tr('Indicator', 'Indicateur'), tr('People', 'Personnes'), tr('Share', 'Part')], [
@@ -462,14 +462,14 @@
       title: tr('Success rate by skill', 'Taux de réussite par compétence') + (state.phase === 'both' ? tr(': before vs after', ' : AVANT et APRES') : ''),
       labels: d.before.domains.map(function (x) { return dom(x.id); }), horizontal: true, format: 'pct', height: showBefore() && showAfter() ? 470 : 320,
       datasets: phaseDatasets(d.before.domains.map(function (x) { return x.rate; }), d.after.domains.map(function (x) { return x.rate; }))
-    }, tr('Same people = answered both before and after: the most reliable measure of progress. PowerPoint and online sharing are not taught in the half-day: they stay in the questionnaire to keep the before/after comparison.',
-          'Mêmes personnes = ont rempli le Questionnaire AVANT et le Questionnaire APRES : la mesure de progression la plus fiable. PowerPoint et le partage en ligne ne sont pas traités dans la demi-journée : ils restent dans le questionnaire pour garder la comparaison.')));
+    }, tr('Same people = they answered both questionnaires. This is the most reliable measure. PowerPoint and online sharing are not taught in the half-day. They stay in the questionnaire to keep the comparison.',
+          'Mêmes personnes = elles ont rempli les deux questionnaires. C\'est la mesure la plus fiable. PowerPoint et le partage en ligne ne sont pas traités dans la demi-journée. Ils restent dans le questionnaire pour garder la comparaison.')));
 
     var lv = DF.SELF_LEVELS;
     var srows = d.before.self.map(function (x, i) { return phaseRow(dom(x.id), isNum(x.avg) ? x.avg / 3 : null, isNum(d.after.self[i].avg) ? d.after.self[i].avg / 3 : null); });
     sec.appendChild(block(tr('Self-assessment (0% = "' + lv[0] + '", 100% = "' + lv[3] + '")', 'Auto-évaluation (0 % = « ' + lv[0] + ' », 100 % = « ' + lv[3] + ' »)'),
       table(tr('Self-assessment', 'Auto-évaluation'), phaseCols(tr('Skill', 'Compétence'), true, false), srows), null,
-      tr('How participants rate themselves, compared with the test result above.', 'Comment les participants se jugent eux-mêmes, à comparer avec le résultat du test ci-dessus.')));
+      tr('Participants rate their own level. Compare with the test result above.', 'Les participants jugent leur propre niveau. Comparez avec le résultat du test ci-dessus.')));
     return sec;
   }
 
@@ -480,8 +480,8 @@
   }
   function evaluationSection(d, n) {
     var ev = d.evaluation, sec = section(n + tr('. Training evaluation', '. Évaluation de la demi-journée'),
-      tr('What participants said in the after questionnaire: expectations, learning, confidence on the Sales Cockpit and difficulties met. One answer per person (the latest).',
-         'Ce que les participants ont dit dans le Questionnaire APRES : attentes, apprentissages, confiance sur le Sales Cockpit et difficultés rencontrées. Une réponse par personne (la dernière).'), true);
+      tr('Answers from the after questionnaire. They cover expectations, learning, the Sales Cockpit and difficulties. The latest answer of each person is kept.',
+         'Les réponses du Questionnaire APRES. Elles portent sur les attentes, les acquis, le Sales Cockpit et les difficultés. La dernière réponse de chaque personne est retenue.'), true);
     sec.appendChild(distBlock(tr('Did the training meet expectations?', 'La formation a-t-elle répondu aux attentes ?'), ev.expectations,
       [tr('Not at all', 'Pas du tout'), tr('In part', 'En partie'), tr('Largely', 'Largement'), tr('Fully', 'Totalement')]));
     sec.appendChild(distBlock(tr('Self-reported knowledge improvement', 'Amélioration des connaissances déclarée'), ev.knowledge,
